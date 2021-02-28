@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '_ku92*z+=_!i1j@==(3_95(l$a*#v#@39_bfdckshh_%+hkhu%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 'kobydrillsdotkom.herokuapp.com'
@@ -157,5 +157,5 @@ CKEDITOR_CONFIGS = {
 
 
 
-if os.getcwd() == '/app':
-    DEBUG=False
+# if os.getcwd() == '/app':
+#     DEBUG=False
