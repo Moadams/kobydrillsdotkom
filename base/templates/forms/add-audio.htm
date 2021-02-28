@@ -1,0 +1,53 @@
+
+{% extends 'main.htm' %}
+{% load static %}
+{% block title %} Add Audio Post {% endblock %}
+{% block content %}
+
+    <style>
+        ul{
+            list-style: none;
+        }
+        #id_title{
+            width: 100%;
+        }
+        #id_author,#id_body,#id_caption{
+            width: 100%;
+        }
+        .errorlist{
+            color: red;
+        }
+    </style>
+    
+
+        <!-- site content
+        ================================================== -->
+        <div class="s-content content">
+            <main class="row content__page">
+                
+                <section class="column large-full entry format-standard">
+
+                    
+                    <h3 class="h2">Add Audio</h3>
+        
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{audioForm.media}}
+                        {{audioForm}}
+                        <input type="submit" class="btn--primary full-width" value="Add Post">
+                    </form>
+
+                </section>
+
+
+                
+            </main>
+
+        </div> <!-- end s-content -->
+
+        <script>
+            var name = '{{user.id}}';
+            document.getElementById('id_author').value = name;
+        </script>
+
+{% endblock %}

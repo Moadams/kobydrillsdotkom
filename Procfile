@@ -1,0 +1,1 @@
+web: gunicorn kobby.wsgi --log-file -

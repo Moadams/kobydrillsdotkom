@@ -1,0 +1,128 @@
+
+{% extends 'main.htm' %}
+{% load static %}
+{% block title %} {{post}} {% endblock %}
+{% block content %}
+
+
+<style>
+    #id_post,#id_name,#id_comment{
+        width: 100%;
+    }
+    
+</style>
+        <!-- site content
+        ================================================== -->
+        <div class="s-content content">
+            <main class="row content__page">
+                
+                <article class="column large-full entry format-standard">
+
+                    <div class="media-wrap entry__media">
+                        <div class="entry__post-thumb">
+                            <img style="width: 100%;" src="{{post.image.url}}" 
+                                 srcset="{{post.image.url}} 2000w, 
+                                 {{post.image.url}} 1000w, 
+                                 {{post.image.url}} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                        </div>
+                    </div>
+
+                    <div class="content__page-header entry__header">
+                        <h1 class="display-1 entry__title">
+                        {{post.title}}
+                        </h1>
+                        <ul class="entry__header-meta">
+                            <li class="author">By <a href="#0" style="text-transform: uppercase;">{{post.author}}</a></li>
+                            <li class="date">{{post.date}}</li>
+                            <li class="cat-links">
+                                {% for category in post.category.all %}
+                                
+                                <a href="{% url 'categories' category.id %}" style="text-transform: uppercase;">{{category}}</a>
+                                
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </div> <!-- end entry__header -->
+
+                    <div class="entry__content">
+
+                        <p class="lead drop-cap">
+                        {{ post.body|safe }}
+                        </p>
+
+                    </div> <!-- end entry content -->
+                    
+                </article> <!-- end column large-full entry-->
+
+
+                <div class="comments-wrap" style="width: 100%; padding-left: 20px;
+                padding-right: 20px;">
+
+                    <div id="comments" class="column large-12">
+
+                        <h3 class="h2">Comments</h3>
+        
+                        <!-- START commentlist -->
+                        <ol class="commentlist">
+                            {% for comment in post.comments.all %}
+                            <li class="depth-1 comment" style="background-color: #eaeaea; padding: 10px 20px; margin: 5px auto;">
+        
+                                <div class="comment__content">
+        
+                                    <div class="comment__info">
+                                        <div class="comment__author" style="text-transform: uppercase;">{{comment.name}}</div>
+        
+                                        <div class="comment__meta">
+                                            <div class="comment__time">{{comment.date}}</div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="comment__text">
+                                    <p>
+                                        {{comment.comment}}
+                                    </p>
+                                    </div>
+        
+                                </div>
+        
+                            </li> <!-- end comment level 1 -->
+                            {% empty %}
+                                <h2 style="text-align:center; color: brown;" >No Comments</h2>
+                            {% endfor %}
+                            
+        
+                        </ol>
+                        <!-- END commentlist -->
+
+                    </div> <!-- end comments -->
+
+                    <div class="column large-12 comment-respond">
+
+                        <!-- START respond -->
+                        <div id="respond">
+            
+                            <h3 class="h2">Add Comment</h3>
+            
+                            <form name="contactForm" id="commentForm" method="post" action="" autocomplete="off">
+                                {% csrf_token %}
+                                {{ commentForm.media }}
+                                {{ commentForm }}
+                                <input type="submit" class="btn--primary full-width" value="Add Comment">
+                            </form> <!-- end form -->
+            
+                        </div>
+                        <!-- END respond-->
+            
+                    </div> <!-- end comment-respond -->
+            
+                </div> <!-- end comments-wrap -->
+            </main>
+
+        </div> <!-- end s-content -->
+
+
+        <script>
+            var name = '{{post.id}}';
+            document.getElementById('id_post').value = name;
+        </script>
+{% endblock %}

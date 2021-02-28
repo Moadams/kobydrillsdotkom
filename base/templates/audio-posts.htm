@@ -1,0 +1,137 @@
+{% extends 'main.htm' %}
+{% load static %}
+{% block title %} Audio Post {% endblock %}
+
+{% block content %}
+
+<style>
+    #id_caption{
+        width: 100%;
+    }
+</style>
+
+<div class="s-content">
+            
+    <div class="container" style="display: block;">
+        
+        <form action="" id = 'searchForm' method="get" autocomplete="off" style="padding: 0 20px;">
+            
+            {{ myFilter.form }}
+            <input type="submit" value="search">
+        </form>
+    </div>
+    <div class="masonry-wrap">
+
+        <div class="masonry">
+
+            <div class="grid-sizer"></div>
+
+            <!-- Articles -->
+            {% for audio in audios %}
+            <article class="masonry__brick entry format-standard animate-this">
+                    
+                <div class="entry__thumb">
+                    <a href="{% url 'audio' audio.slug %}" class="entry__thumb-link">
+                        <img src="{{audio.thumbnail.url}}"
+                                 alt="">
+                    </a>
+                </div>
+
+                <div class="entry__text">
+                    <div class="entry__header">
+
+                        <h2 class="entry__title"><a href="{% url 'audio' audio.slug %}">{{ audio.caption }}</a></h2>
+                        <div class="entry__meta">
+                            <span class="entry__meta-cat">
+                                {% for category in audio.category.all %}
+                                <a href="{% url 'categories' category.id %}">{{ category }} &nbsp; | </a> 
+                                {% endfor %}
+                            </span>  
+                            <span class="entry__meta-date">
+                                <a href="#"> {{ audio.date }}</a>
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <div class="entry__excerpt">
+                        <p>
+                            {% if  audio.get_body_length  > 300 %}
+                                {{audio.body|slice:"300"|safe}} ... <a href="{% url 'audio' audio.slug %}">Read More</a>
+                            {% else %}
+                                {{audio.body|safe}}
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                    <span style="display: flex;     justify-content: space-evenly;
+                    align-content: center;
+                    margin: 20px auto 0;">
+                        <a href="{% url 'update_audio_post' audio.slug %}" style="background: rgb(85, 85, 248);
+                        padding: 2px 17px;
+                        border-radius: 10px;
+                        color: white;">Edit</a>
+                        <a onclick="confirm('Are you sure?');" href="{% url 'delete_audio_post' audio.slug %}" style="background: rgb(241, 40, 40);
+                        padding: 2px 17px;
+                        border-radius: 10px;
+                        color: white;">Delete</a>
+                    </span>
+                    {% endif %}
+                    
+                </div>
+            </article> <!-- end of article one -->
+        {% empty %}
+            <h1 style="text-align: center;">
+                No Articles posted Yet
+            </h1>
+        {% endfor %}
+
+        </div> <!-- end masonry -->
+
+    </div> <!-- end masonry-wrap -->
+
+    <div class="row">
+        <div class="column large-full">
+            <nav class="pgn">
+                {% if audios.has_other_pages %}
+                <ul>
+                    {% if audios.has_previous %}
+                    <li>
+                        <a class="pgn__prev" href="?page={{ audios.previous_page_number }}">Prev</a>
+                    </li>
+                    {% endif %}
+                    {% for i in audios.paginator.page_range %}
+                        {% if audios.number == i %}
+                            <li>
+                                <span class="pgn__num current">{{i}}</span>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="?page={{i}}" class="pgn__num">{{i}}</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+                    <!-- <li><span class="pgn__num current">2</span></li>
+                    <li><a class="pgn__num" href="#0">3</a></li>
+                    <li><a class="pgn__num" href="#0">4</a></li>
+                    <li><a class="pgn__num" href="#0">5</a></li>
+                    <li><span class="pgn__num dots">…</span></li>
+                    <li><a class="pgn__num" href="#0">8</a></li>
+                    <li><a class="pgn__next" href="#0">Next</a></li> -->
+                    {% if audios.has_next %}
+                        <li>
+                            <a class="pgn__next" href="?page={{ audios.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+</div> <!-- end s-content -->
+
+
+
+{% endblock %}

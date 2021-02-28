@@ -1,0 +1,63 @@
+{% extends 'main.htm' %}
+{% load static %}
+{% block title %} Contact Us {% endblock %}
+{% block content %}
+
+
+<div class="s-content content">
+    <main class="row content__page">
+        
+        <section class="column large-full entry format-standard">
+
+            <div class="media-wrap">
+                <div>
+                    <img src="{% static 'images/KobyDrillsDotKom.png' %}" srcset="{% static 'images/KobyDrillsDotKom.png' %} 2000w, 
+                    {% static 'images/KobyDrillsDotKom.png' %} 1000w, 
+                    {% static 'images/KobyDrillsDotKom.png' %} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                </div>
+            </div>
+
+            <div class="content__page-header">
+                <h1 class="display-1">
+                Get In Touch.
+                </h1>
+            </div> <!-- end content__page-header -->
+
+            <p class="lead">
+            KobyDrillsDotKom is always here for you. Get into contact with us and let us make your voice heard. 
+            Do you have any news that you want Ghana or even the world to hear of? Contact Us and lets help you easily.
+            </p>
+
+            
+            <div class="row">
+                <div class="column large-six tab-full">
+                    <h4>Where to Find Us</h4>
+
+                    <p>
+                    Oyoko - Koforidua<br>
+                    Eastern Region<br>
+                    Ghana
+                    </p>
+
+                </div>
+
+                <div class="column large-six tab-full">
+                    <h4>Contact Info</h4>
+
+                    <p>kobydrills@gmail.com<br>
+                    Phone: +197 543 2345
+                    </p>
+
+                </div>
+            </div>
+
+            
+        </section>
+
+    </main>
+
+</div> <!-- end s-content -->
+
+
+
+{% endblock %}
