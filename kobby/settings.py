@@ -157,5 +157,5 @@ CKEDITOR_CONFIGS = {
 
 
 
-if os.getcwd() == '/app':
-    DEBUG=False
+# if os.getcwd() == '/app':
+#     DEBUG=False
