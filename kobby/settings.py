@@ -29,7 +29,7 @@ SECRET_KEY = '_ku92*z+=_!i1j@==(3_95(l$a*#v#@39_bfdckshh_%+hkhu%'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1', 'kobydrills-dot-kom.herokuapp.com'
+    '127.0.0.1', 'kobydrillsdotkom.herokuapp.com'
 ]
 
 
