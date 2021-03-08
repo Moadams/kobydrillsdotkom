@@ -167,5 +167,5 @@ options.pop('sslmode', None)
 
 
 
-if os.getcwd() == '/app':
-    DEBUG=False
+# if os.getcwd() == '/app':
+#     DEBUG=False
