@@ -3,6 +3,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from datetime import date, time, datetime
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 
 # Create your models here.
 
@@ -54,7 +56,7 @@ class Post(models.Model):
     
 class VideoPost(models.Model):
     caption = models.CharField(max_length=100)
-    video = models.FileField(upload_to='videos/%y/')
+    video = models.FileField(upload_to='videos/%y/',storage=VideoMediaCloudinaryStorage(),validators=[validate_video])
     thumbnail = models.ImageField(null = True, blank = True, default = 'defaults/kobydrillsdotkom.png', upload_to = 'videos/%y/thumbnails')
     body = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
