@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'cloudinary_storage',
+    'cloudinary',
     'ckeditor',
     'crispy_forms',
     'django_filters',
@@ -141,6 +143,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
@@ -158,6 +162,12 @@ CKEDITOR_CONFIGS = {
         'height': 300,
         'width': '100%',
     },
+}
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'kobydrillsdotkom',
+    'API_KEY': '144184297217965',
+    'API_SECRET': 'whd62M55rsY5s859nKIl0xOZtKM'
 }
 
 django_heroku.settings(locals())
