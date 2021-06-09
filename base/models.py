@@ -21,7 +21,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User,on_delete= models.CASCADE)
     category = models.ManyToManyField(Category)
-    image = models.ImageField(upload_to = 'images',default = 'defaults/kobydrillsdotkom.png')
+    image = models.ImageField(upload_to = 'images',default = 'defaults/kobyDrillsDotKom.png')
     body = RichTextUploadingField()
     date = models.DateField(auto_now_add=True)
     slug = models.SlugField(blank = True, null = True)
@@ -57,7 +57,7 @@ class Post(models.Model):
 class VideoPost(models.Model):
     caption = models.CharField(max_length=100)
     video = models.FileField(upload_to='videos/%y/',storage=VideoMediaCloudinaryStorage(),validators=[validate_video])
-    thumbnail = models.ImageField(null = True, blank = True, default = 'defaults/kobydrillsdotkom.png', upload_to = 'videos/%y/thumbnails')
+    thumbnail = models.ImageField(null = True, blank = True, default = 'defaults/kobyDrillsDotKom.png', upload_to = 'videos/%y/thumbnails')
     body = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     category = models.ManyToManyField(Category)
@@ -111,9 +111,9 @@ class VideoPostComment(models.Model):
         return f'{self.video.caption} - {self.name}'
     
 class AudioPost(models.Model):
-    audio = models.FileField(upload_to='audio/%y/')
+    audio = models.FileField(upload_to='audio/%y/',storage=VideoMediaCloudinaryStorage(), validators = [validate_video])
     caption = models.CharField(max_length=100)
-    thumbnail = models.ImageField(null = True, blank = True, default = 'defaults/kobydrillsdotkom.png', upload_to = 'audios/%y/thumbnails')
+    thumbnail = models.ImageField(null = True, blank = True, default = 'defaults/kobyDrillsDotKom.png', upload_to = 'audios/%y/thumbnails')
     body = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     category = models.ManyToManyField(Category)
